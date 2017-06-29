@@ -36,6 +36,7 @@ export default class moiveList extends Component {
     fetch(REQUEST_URL)
     .then((response) => response.json())
     .then((responseData) =>{
+      console.log('网络请求成功了');
       this.setState({
         dataSource : this.state.dataSource.cloneWithRows(responseData.movies),
         loaded : true,
