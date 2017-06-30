@@ -4,32 +4,56 @@
  * @flow
  */
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+ import React, { Component } from 'react';
+ import {
+   AppRegistry,
+   StyleSheet,
+   Text,
+   View,
+   Button
+ } from 'react-native';
+ import { StackNavigator } from 'react-navigation'
 
-export default class Learn_Navigation extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Double tap R on your keyboard to reload,{'\n'}
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
-  }
-}
+ class HomeScreen extends React.Component {
+   static navigationOptions = {
+     title : '附近',
+   };
+   render() {
+     const { navigate } = this.props.navigation;
+     var testPra = {'testKey' : '我是谁','user' : 'React'}
+     return (
+       <View>
+         <Text>Hello,React</Text>
+         <Button
+           onPress={() =>
+             navigate('Detail',testPra)
+           }
+           title = '详情'
+         />
+       </View>
+     );
+   }
+ }
+
+ class DetailSereen extends React.Component {
+   static navigationOptions = ({ navigation }) => ({
+    title: `${navigation.state.params.user}`,
+   });
+
+   render() {
+     const { params } = this.props.navigation.state;
+     return (
+       <Text>Hello {params.testKey}</Text>
+     );
+   }
+ }
+
+ const Learn_Navigation = StackNavigator({
+   Home : { screen : HomeScreen },
+   Detail : { screen : DetailSereen},
+ });
+
+ AppRegistry.registerComponent('Learn_Navigation', () => Learn_Navigation);
 
 const styles = StyleSheet.create({
   container: {
