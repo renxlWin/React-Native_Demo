@@ -1,0 +1,3 @@
+rootProject.name = 'Excise_Scroll'
+
+include ':app'
